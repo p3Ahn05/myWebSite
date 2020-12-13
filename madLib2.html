@@ -1,0 +1,86 @@
+<html>
+<head> 
+<script language="JavaScript">
+
+var partsOfSpeech = ["Please enter a type of weather", "please enter a type of living creature", "Please enter a boys name", "Please enter a sport", "Please enter a body part", "Please enter a vehicle", "Please enter different body part"];
+var answers = new Array(partsOfSpeech.length);
+var story = ["One evening on a ", " day a ", ", named ", ", went to play ", " . Suddenly his ", " came off and ran into the road where it was hit by a ", ". An ambulance came to give CPR and everything turned out ok. The body part reattached to his ", " which was quite strange. In the end he lived happily ever after with his mismatched body." ];
+var count = 0;
+
+function prompt()
+{
+	// if this is the start, display the textbox and hide the story. 
+	// then display the first element of partsOfSpeech in the textbox. 
+
+	document.getElementById("userEnter").style.visibility = "visible";
+	document.getElementById("story").style.visibility = "hidden";
+	document.getElementById("response").value = partsOfSpeech[count];
+}
+
+
+function getWords()
+{
+	var wordBox = document.getElementById("response")
+	answers[count] = wordBox.value;
+	
+	count++;
+
+	if(count < partsOfSpeech.length) // there's another prompt coming
+	{
+		prompt();
+	}
+	else // done entering words. Time to display story
+	{
+		count = 0;
+		document.getElementById("story").innerHTML = displayStory();
+	}
+}
+
+
+function displayStory()
+{
+	var answer = "";
+	var i;
+	
+	// loop to stitch elements of story with elements of answers. 
+	
+	for (i = 0; i < answers.length; i++)
+	{
+	answer = answer + story[i]
+	answer = answer + answers[i]
+	}
+	answer = answer + story[i];
+
+
+	// if there's one more element in story than answers, then add the last element of answers
+
+	// Make the story div visible, and the userEnter div hidden.
+
+	document.getElementById("story").style.visibility = "visible";
+	document.getElementById("userEnter").style.visibility = "hidden";		
+
+	// return the variable answer.
+
+	return answer;
+}
+
+</script>
+</head>
+<body		background = "images/brick.jpg">
+	
+<center> 
+<h1>My MadLib!</h1>
+Click <a href="index.html">here</a> return to my homepage.
+</br></br>
+<input id="daButton" type="button" value="start" onClick="prompt()"/>
+</center>
+<div id="userEnter" style="position:absolute; left:200; top: 100; visibility:hidden;">
+<input type = "text" id="response" value="" onfocusout="getWords()"/>
+</div>
+
+<div id="story" style="position:absolute; overflow:scroll; top:300; left:200; width:400; height: 200; visibility:hidden">
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+<div>
+
+</body>
+</html>
