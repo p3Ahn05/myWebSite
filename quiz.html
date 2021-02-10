@@ -1,0 +1,133 @@
+<html> 
+<head> 
+<script language="JavaScript">
+
+/*************** Algorithm ******************
+1. Create and fill in questions and answers arrays
+2. In displayQuestion, increase index and write an if statement to reset index when it reaches the last element of the array.
+3. In displayQuestion write code that sets the value of the answer texbox to nothing when you move on to the next question.
+4. Now in updateScore link checkAnswer with a new var so you can use it as the parameter for the checkAnswer function.
+5. Write an if statement that checks if the users answer is true or false and if true increase score.
+6. Now in checkAnswer write code that compares users answer to the answer array and if it is true to set the value of userA to true.
+7. At the bottom of updateScore write an if statement that checks if index is at the last element
+8. If it is call function giveResults
+9. Create function giveResults and inside write code that sets the textbox value to var score.
+10. Make it so the results textbox is only visible when as the last element of the array.
+
+*/
+
+
+var questions = ["How much of the Earths oceans have been discovered?", "Who was the 1st president?", "How many floors is the Empire State Building?", "Where is the tallest building in the world located?", "How many bits are in a byte?", "What is the largest city in the world?", "Who was Queen during the French Revolution?", "What animal has the longest life span?", "What year did the war of 1812 start?", "What year was AJ Desai born?"]; // Create an array of 10ish questions.
+
+var answers = ["20 percent", "George Washington", "102 floors", "Dubai", "8 bits", "Chongqing", "Marie Antoinette", "Immortal jellyfish", "1812", "2005"]; // Create an array of the corresponding answers to the questions above.
+
+var index = -1;
+
+var score = 0
+
+
+// Create code in displayQuestion that will display the contents of the questions array, one 
+// element at a time. After the last element is displayed, the program should display the first
+// element again.
+function displayQuestion()
+{
+    index++;
+   
+    if(index >= 10)
+    {
+        index = 0;
+    }
+		
+    document.getElementById("question").value = questions[index];
+    
+    document.getElementById("answer").value = "";
+    
+    document.getElementById("results").style.visibility = "hidden";		
+}
+
+
+// This function will first acquire the user's answer (from the textbox with the ID "answer". Then this function will pass that to the checkAnswer function (note: that there is a parameter.) The checkAnswer will return a true or a false. If that function returns true, then the score variable will increase by 1, and an alert should pop up saying "Correct" or something positive. If the checkAnswer function comes back false, then score doesn't increase but an alert should announce "incorect." or something similar. 
+function updateScore()
+{
+    var userA = document.getElementById("answer").value;
+    //alert(userA);
+    
+    var storage = checkAnswer(userA);
+    if(storage == true)
+    {
+        alert("true");
+        score += 100;
+    }
+    else
+    {
+        alert("false");
+    }
+      
+    document.getElementById("results").style.visibility = "hidden";
+    
+    if(index == questions.length-1)
+    {
+      giveResults();
+    }
+    
+}
+ 
+    
+function giveResults()
+{
+       document.getElementById("results").value = "Score = " + score;
+       document.getElementById("results").style.visibility = "visible";
+}
+
+// This function takes a parameter which will be the users answer. If what the user has submitted the correct answer, this method should return true. Otherwise it should return false. 
+function checkAnswer(ans)
+{
+        var correct = true;
+       if(ans == answers[index])
+        {
+            correct = true;
+        }
+        else
+        {
+            correct = false;
+        }
+    
+    document.getElementById("results").style.visibility = "hidden";
+       return correct;
+}
+
+
+
+</script>
+</head>
+<body bgcolor="red">
+<font color="white">
+<center>
+<h1>My Quiz</h1>
+Click <a href="index.html">here</a> return to my homepage.
+
+<br/><br/>
+<table border = 3>
+	<tr>
+		<td>  	<input id="question" type="text" size="70" readonly = true/>	</td>
+	</tr>
+	<tr height = "12"><td></td>
+	</tr>
+	<tr>
+		<td>	<input id="answer" type="text" size="70" /> </td>
+	</tr>
+</table>
+<br/><br/>
+<input type="button" value="Next Question" onclick="displayQuestion()"/>
+    <br/><br/>
+<input type="button" value="Check Answer" onclick="updateScore()"/>
+    <br/><br/>
+    <tr>
+		<td>	<input id="results" type="text" size="70" readonly = true/> </td>
+	</tr>
+</center>
+
+
+</body>
+</html>
+
