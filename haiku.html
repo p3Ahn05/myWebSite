@@ -1,0 +1,187 @@
+<html>
+<head> 
+<body>
+<script language="JavaScript">
+
+var themeOne = ["Please select a theme","Summer","Spring","Fall"];
+var lineOne = ["Please select a theme", "Cicadas chirping", "Snow melts into spring", "Leaves of warm colors"];
+var themeTwo = ["Please select a theme","Seasons","Companionship","Life"];
+var lineTwo = ["-Choose line 2--", "Forever changing seasons", "Together throughout hardships", "Life flows like raging water"];
+var themeThree = ["Please select a theme","Love","Death","Life"];
+var lineThree = ["--Choose line 3--", "Love blooms from nature", "Until greeting death", "Facing existence"];
+
+    var poem = "";
+
+function loadData()
+{
+	var sum = 0;
+	for(var i = 0; i<themeOne.length; i++)
+    {
+        var daList = document.getElementById("firstLine");
+  		var option = document.createElement("option");
+  		option.text = themeOne[i];
+        daList.add(option);
+        
+        var daList2 = document.getElementById("secondLine");
+  		var option2 = document.createElement("option");
+  		option2.text = themeTwo[i];
+        daList2.add(option2);
+        
+        var daList3 = document.getElementById("thirdLine");
+  		var option3 = document.createElement("option");
+  		option3.text = themeThree[i];
+        daList3.add(option3);
+    }
+     document.getElementById("poetry").style.visibility = "hidden";
+} 
+
+   
+function start()
+{
+	// Write code that will store the selection object("firstLine") in a variable called selection
+
+	var selection = document.getElementById("firstLine");
+    var selection2 = document.getElementById("secondLine");
+    var selection3 = document.getElementById("thirdLine");
+    
+   
+
+	// Write code that will store the index of the users selection in a variable called storage
+
+	var storage = getIndex(selection.value);
+    var storage2 = getIndex2(selection2.value);
+   	var storage3 = getIndex3(selection3.value);
+ 
+
+	// Write an if statement that test if storage is -1. If so, alert an error has occurred if daIndex
+	// is not -1 then set poetry textboc to the value of the poem
+	
+	if(storage <= -1)
+	{
+    alert("error");
+	}
+    else if(storage2 <= -1)
+    {
+    alert("error");
+    }
+    else if(storage3 <= 1)
+    {
+    alert("error");
+    }
+    else
+    {
+    document.getElementById ("poetry").innerHTML = poem;
+    document.getElementById("poetry").style.visibility = "visible";
+    document.getElementById("firstLine").style.visibility = "hidden";
+    document.getElementById("secondLine").style.visibility = "hidden";
+    document.getElementById("thirdLine").style.visibility = "hidden";
+    }
+    
+}
+
+   
+function getIndex(a)
+{
+    var poem1 = "";
+    
+	//write a for loop that traverses the entire themeOne array once
+   
+	for(var i = 0; i < themeOne.length; i++)
+	{
+		//write if statement that checks if i is equal to the parameter passed in getIndex function
+
+		if(themeOne[i] == a) 
+		{
+			poem1 = i;
+		}
+        
+	}
+ 
+    poem = lineOne[poem1];
+    poem += "<br/>";
+    //alert("getIndex"+ poem);
+}
+    
+   
+    
+    
+    function getIndex2(b)
+{
+    var poem2 = "";
+	
+	//write a for loop that traverses the entire themeTwo array once
+   
+	for(var i = 0; i < themeTwo.length; i++)
+	{
+		//write if statement that checks if i is equal to the parameter passed in getIndex function
+
+		if(themeTwo[i] == b)
+		{
+			poem2 += i;
+		}
+        
+	}
+    poem += lineTwo[poem2];
+    poem += "<br/>";
+    //alert("getIndex"+ poem);
+}
+     
+    
+    function getIndex3(c)
+{
+    var poem3 = "";
+	
+	//write a for loop that traverses the entire themeThree array once
+   
+	for(var i = 0; i < themeThree.length; i++)
+	{
+		//write if statement that checks if i is equal to the parameter passed in getIndex function
+
+		if(themeThree[i] == c) 
+		{
+			poem3 += i;
+		}
+        
+	}
+    poem += lineThree[poem3];
+    //alert("getIndex"+ poem);
+}
+    
+ 
+function restart()
+    {
+    document.getElementById("poetry").style.visibility = "hidden";
+    document.getElementById("firstLine").style.visibility = "visible";
+    document.getElementById("secondLine").style.visibility = "visible";
+    document.getElementById("thirdLine").style.visibility = "visible";
+    }
+  
+
+    
+</script>
+</head>
+<body onload="loadData()" bgcolor="#FFDB1E">
+<font color="black">
+<center>
+<h1>Haiku Creator</h1>
+Click <a href="index.html">here</a> return to my homepage.
+
+<br/><br/>
+    <tr>
+    <br/>
+		<td>  	<select name="p1" id="firstLine"></select>	</td>
+        <td>  	<select name="p2" id="secondLine"></select>	</td>
+        <td>  	<select name="p3" id="thirdLine"></select>	</td>
+        <br/><br/>
+	</tr>
+</table>
+    
+    <div id = "poetry" style = "position : absolute ; top : 110 ; left : 600; visibility: hidden;"> </div>    
+    
+<br/>
+    <input type="button" value="Submit" onclick="start()"/>
+    <input type="button" value="Restart" onclick="restart()"/>
+<center/>
+
+</body>
+</html>
